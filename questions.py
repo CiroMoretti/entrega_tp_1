@@ -1,3 +1,7 @@
+##Comentario: dejo mis comentarios con los enunciados y mi proceso de pensamiento
+##para poder estudiar luego.
+##Espero no sea molestia.
+
 ## fix 1
 ##El juego tiene un bug. Si el usuario ingresa más de una letra, un número o
 ##cualquier otro carácter inválido,
@@ -21,23 +25,45 @@
 ## Mostrar/setear y mostrar puntaje al final.
 
 
+##fix 3:
+##Modificá el juego para que las palabras estén agrupadas por categoría.
+##Al inicio de cada partida, mostrar las categorías disponibles y permitir
+##que el usuario elija una. Ayuda: utilizá un diccionario donde las claves
+##sean los nombres de las categorías y los valores sean listas de palabras.
+
+##idea de resolución: la lista words la tendría que reemplazar por un 
+## diccionario de categorías. Un Input que elija la categoría-> que se
+## juegue con la categoría elegida.
+
 import random
-words = [
-    "python",
-    "programa",
-    "variable",
-    "funcion",
-    "bucle",
-    "cadena",
-    "entero",
-    "lista",
-]
-word = random.choice(words)
+##diccionario con listas. las listas son las categorias.
+categorias = {
+    "Programacion":["python", "programa", "variable", "funcion", "bucle", "cadena", "entero", "lista",],
+    "Economia":["activos", "pasivos", "oferta", "demanda", "mercado", "utilidad",],
+    "Animales":[ "leon", "lobo", "jirafa", "hipopotamo", "delfin", "elefante",]}
+
 guessed = []
 attempts = 6
 puntaje = 0 ##inicializo
 print("¡Bienvenido al Ahorcado!")
 print()
+
+while True:
+    print("Categorías: ") ##imprimir las categorias
+    for  nombres_categorias in categorias.keys(): ##por: cantidad de categorias en el diccionario
+        print(f"- {nombres_categorias}") ##imprime: el nombre de la categoria
+    print()
+
+    cat_seleccionada = input("Seleccione una categoria: ").capitalize() ##selecciona. el capitalize es para que la primera letra sea mayuscula.
+
+    if cat_seleccionada in categorias: ##comprueba que la entrada sea válida
+        cat_juego = categorias[cat_seleccionada]
+        break ##se rompe el bucle
+    else:
+        print("Entrada no válida.") ## vuelve al bucle hasta que se haya una entrada válida
+
+word = random.choice(cat_juego) 
+
 while attempts > 0:
     # Mostrar progreso: letras adivinadas y guiones para las que faltan
     progress = ""
