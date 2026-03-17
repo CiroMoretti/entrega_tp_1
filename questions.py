@@ -1,3 +1,13 @@
+##El juego tiene un bug. Si el usuario ingresa más de una letra, un número o
+##cualquier otro carácter inválido,
+##el programa se comporta de manera inesperada. Modificalo para que en ese caso
+##muestre el mensaje
+##"Entrada no válida" y continúe el juego en la siguiente iteración.
+
+## idea de resolución: controlar que se ingrese un único caracter, y que sea letra.
+## devolver "entrada no válida" y pedir un input nuevo.
+
+
 import random
 words = [
     "python",
@@ -29,7 +39,11 @@ while attempts > 0:
         break
     print(f"Intentos restantes: {attempts}")
     print(f"Letras usadas: {', '.join(guessed)}")
-    letter = input("Ingresá una letra: ")
+    letter = input("Ingresá una letra: ") ##acá el input de letra!!
+
+    if len(letter) != 1 or not letter.isalpha():  ##controlo que sea un solo caracter letra
+        print("Entrada no válida.")
+        continue  ## vuelve al input
     if letter in guessed:
         print("Ya usaste esa letra.")
     elif letter in word:
